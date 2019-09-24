@@ -12,7 +12,7 @@ public class CalculatorTest {
 	}
 	@Test
 	public void testDiff() {
-		assertEquals(3, c.difference(4, 1));
+		assertEquals(2, c.difference(4, 1));
 	}
 	
 
