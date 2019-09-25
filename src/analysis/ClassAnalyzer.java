@@ -24,49 +24,22 @@ import org.junit.runners.model.InitializationError;
 
 import p1.Calculator;
 import p1.CalculatorTest;
+import p3.Max;
+import p3.MaxTest;
+import triangle.Triangle;
+import triangle.TriangleTest;
 
 import org.jacoco.core.runtime.RuntimeData;
 import org.jacoco.core.data.SessionInfoStore;
-/*
- * import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.security.CodeSource;
-import java.security.ProtectionDomain;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.imageio.stream.FileImageInputStream;
-
-import org.jacoco.core.analysis.Analyzer;
-import org.jacoco.core.analysis.CoverageBuilder;
-import org.jacoco.core.analysis.IClassCoverage;
-import org.jacoco.core.analysis.ICounter;
-import org.jacoco.core.analysis.ILine;
-import org.jacoco.core.data.ExecutionDataStore;
-import org.jacoco.core.data.SessionInfoStore;
-import org.jacoco.core.instr.Instrumenter;
-import org.jacoco.core.runtime.IRuntime;
-import org.jacoco.core.runtime.LoggerRuntime;
-import org.jacoco.core.runtime.RuntimeData;
-import org.junit.runner.JUnitCore;
-import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.FrameworkMethod;
-import org.junit.runners.model.InitializationError;
- * 
- * 
- */
 
 public class ClassAnalyzer {
 	/**
 	 * A class loader that loads classes from in-memory data.
 	 */
+	String targetName;
+	String junitName;
+	int totalPassed;
+	int totalFailed;
 	public static class MemoryClassLoader extends ClassLoader
 	{
 		private final Map<String, byte[]> definitions = new HashMap<String, byte[]>();
@@ -96,6 +69,7 @@ public class ClassAnalyzer {
 		//System.out.println(getClass().getResourceAsStream(resource));
 		return getClass().getResourceAsStream(resource);
 	}
+/*	
 	private void printCounter(final String unit, final ICounter counter)
 	{
 		final Integer missed    = Integer.valueOf(counter.getMissedCount());
@@ -103,6 +77,7 @@ public class ClassAnalyzer {
 
 		System.out.printf("%s of %s %s missed%n", missed, total, unit);
 	}
+*/
 	private String getColor(final int status)
 	{
 		switch (status) {
@@ -133,65 +108,10 @@ public class ClassAnalyzer {
         runner.run(res);
         return res;
     }
-///*	private void analyze() throws Exception
-//	{
-//		final String targetName = Calculator.class.getName();
-//		//System.out.println(targetName);
-//		// For instrumentation and runtime we need a IRuntime instance to collect execution data:
-//		final IRuntime runtime = new LoggerRuntime();
-//		// The Instrumenter creates a modified version of our test target class that contains additional probes for execution data recording:
-//		final Instrumenter instr = new Instrumenter(runtime);
-//		final byte[] instrumented = instr.instrument(getTargetClass(targetName), "");
-//		// Now we're ready to run our instrumented class and need to startup the runtime first:
-//		final RuntimeData data = new RuntimeData();
-//		runtime.startup(data);
-//		// In this tutorial we use a special class loader to directly load the instrumented class definition from a byte[] instances.
-//		final MemoryClassLoader memoryClassLoader = new MemoryClassLoader();
-//		memoryClassLoader.addDefinition(targetName, instrumented);
-//		final Class<?> targetClass = memoryClassLoader.loadClass(targetName);
-//		// Here we execute our test target class through its Runnable interface:
-//		/*final Runnable targetInstance = (Runnable) targetClass.newInstance();
-//        targetInstance.run();*/
-//
-//		String junitName = CalculatorTest.class.getName();
-//		memoryClassLoader.addDefinition(junitName, instr.instrument(getTargetClass(junitName), ""));
-//		final Class<?> junitClass = memoryClassLoader.loadClass(junitName);
-//		//JUnitCore junit = new JUnitCore();
-//		//Result result = junit.run(junitClass);
-//		Result result=runTest(junitClass, "testAdd");
-////		Result result=runTest(junitClass,"testAdd");
-////        System.err.println(result.getFailureCount());
-//		System.out.println(result.isOK());
-//		
-//		//System.out.println("Failure count: " + result.getFailureCount());
-//
-//		// At the end of test execution we collect execution data and shutdown the runtime:
-//		final ExecutionDataStore executionData = new ExecutionDataStore();
-//		data.collect(executionData, new SessionInfoStore(), false);
-//		runtime.shutdown();
-//		// Together with the original class definition we can calculate coverage information:
-//		collect(executionData, result.isOK(), targetName);
-//		/*	final CoverageBuilder coverageBuilder = new CoverageBuilder();
-//		final Analyzer analyzer = new Analyzer(executionData, coverageBuilder);
-//		analyzer.analyzeClass(getTargetClass(targetName), targetName);
-//		// Let's dump some metrics and line coverage information:
-//		for (final IClassCoverage cc : coverageBuilder.getClasses())
-//		{
-//			System.out.printf("Coverage of class %s%n", cc.getName());
-//			printCounter("instructions", cc.getInstructionCounter());
-//			printCounter("branches", cc.getBranchCounter());
-//			printCounter("lines", cc.getLineCounter());
-//			printCounter("methods", cc.getMethodCounter());
-//			printCounter("complexity", cc.getComplexityCounter());
-//			for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
-//				System.out.printf("Line %s: %s%n", Integer.valueOf(i), getColor(cc.getLine(i).getStatus()));
-//			}
-//		}
-//		*/
-//	}
-//	*/
+
 	public void test(String methodName) throws Exception {
-		final String targetName = Calculator.class.getName();
+		//targetName = Calculator.class.getName();
+		//targetName = Max.class.getName();
 		
 		final IRuntime runtime = new LoggerRuntime();
 		final Instrumenter instr = new Instrumenter(runtime);
@@ -203,19 +123,25 @@ public class ClassAnalyzer {
 		memoryClassLoader.addDefinition(targetName, instrumented);
 		final Class<?> targetClass = memoryClassLoader.loadClass(targetName);
 		
-		String junitName = CalculatorTest.class.getName();
+		//junitName = CalculatorTest.class.getName();
+		//junitName = MaxTest.class.getName();
 		memoryClassLoader.addDefinition(junitName, instr.instrument(getTargetClass(junitName), ""));
 		final Class<?> junitClass = memoryClassLoader.loadClass(junitName);
 		Result result=runTest(junitClass, methodName);
 		boolean currentTestPassed=result.isOK();
-		System.out.println(methodName+" "+currentTestPassed);
+		
+		if(currentTestPassed) totalPassed++;
+		else totalFailed++;
+		
+		//System.out.println(methodName+" "+currentTestPassed);
 		final ExecutionDataStore executionData = new ExecutionDataStore();
 		data.collect(executionData, new SessionInfoStore(), false);
 		runtime.shutdown();
 		
 		collect(executionData, currentTestPassed, targetName);
 	}
-	public void collect(final ExecutionDataStore executionData, boolean currentTestFailed,String targetName) {
+	
+	public void collect(final ExecutionDataStore executionData, boolean currentTestPassed,String targetName) {
 		final CoverageBuilder coverageBuilder = new CoverageBuilder();
 		Analyzer analyzer = new Analyzer(executionData, coverageBuilder);
 
@@ -228,21 +154,29 @@ public class ClassAnalyzer {
 
 		for (final IClassCoverage cc : coverageBuilder.getClasses())
 		{
-		/*	System.out.printf("Coverage of class %s%n", cc.getName());
-			printCounter("instructions", cc.getInstructionCounter());
-			printCounter("branches", cc.getBranchCounter());
-			printCounter("lines", cc.getLineCounter());
-			printCounter("methods", cc.getMethodCounter());
-			printCounter("complexity", cc.getComplexityCounter());
-		*/	
 			for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
-				System.out.printf("Line %s: %s%n", Integer.valueOf(i), getColor(cc.getLine(i).getStatus()));
+				
+				if(getColor(cc.getLine(i).getStatus())=="green") {
+					System.out.print(1+" ");
+				}
+				else {
+					System.out.print(0+" ");
+				}
+				//System.out.printf("Line %s: %s%n", Integer.valueOf(i), getColor(cc.getLine(i).getStatus()));
+				
+				//System.out.println();
 			}
+			if(currentTestPassed) {
+				System.out.print("+");
+			}
+			else {
+				System.out.print("-");
+			}
+			System.out.println();
 		}
-		
 	}
-	public void analyze() throws Exception {
-		Class classobj = CalculatorTest.class;
+	public void analyze(Class classobj) throws Exception {
+		//Class classobj = CalculatorTest.class;
 		Method[] methods = classobj.getDeclaredMethods(); 
 		int nMethod=0;
 		for (Method method : methods) { 
@@ -253,9 +187,18 @@ public class ClassAnalyzer {
         } 
 		System.out.println(nMethod);
 	}
+	public void generateMatrix() {
+		
+		
+	}
 	public static void main(final String[] args) throws Exception{
 		ClassAnalyzer ca=new ClassAnalyzer();
-		
-		ca.analyze();
+		//ca.targetName = Max.class.getName();
+		//ca.junitName=MaxTest.class.getName();
+		//ca.analyze(MaxTest.class);
+		ca.targetName = Triangle.class.getName();
+		ca.junitName=TriangleTest.class.getName();
+		ca.analyze(TriangleTest.class);
+		System.out.println("Passed= "+ca.totalPassed+"\nFailed= "+ca.totalFailed);
 	}
 }

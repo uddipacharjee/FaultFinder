@@ -14,6 +14,9 @@ public class CalculatorTest {
 	public void testDiff() {
 		assertEquals(2, c.difference(4, 1));
 	}
-	
+	@Test
+	public void testMax() {
+		assertEquals(5, c.max(3,4,5));
+	}
 
 }

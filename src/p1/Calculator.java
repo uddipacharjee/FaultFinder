@@ -11,4 +11,15 @@ public class Calculator {
 		diff=Math.abs(x-y);
 		return diff;
 	}
+	public int max(int a,int b,int c) {
+		int maximum=a;
+		if(b>maximum) {
+			maximum=b;
+		}
+		if(c>maximum) {
+			maximum=c;
+		}
+		return maximum;
+	}
+	
 }
