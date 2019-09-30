@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="C:/Users/Hp/git/FaultFinder/FaultFinder/asm-analysis-7.1-20190303.123049-38.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Hp/git/FaultFinder/FaultFinder/asm-commons-7.1-20190303.123051-38.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Hp/git/FaultFinder/FaultFinder/asm-tree-7.1-20190303.123054-38.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Hp/git/FaultFinder/FaultFinder/org.jacoco.core-0.8.4.201905082037.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Hp/git/FaultFinder/FaultFinder/org.jacoco.core-0.8.4.201905082037.jar" sourcepath="C:/Users/Hp/.m2/repository/org/jacoco/org.jacoco.core/0.8.4/org.jacoco.core-0.8.4-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

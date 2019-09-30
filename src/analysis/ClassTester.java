@@ -2,10 +2,14 @@ package analysis;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
@@ -32,7 +36,7 @@ import triangle.TriangleTest;
 import org.jacoco.core.runtime.RuntimeData;
 import org.jacoco.core.data.SessionInfoStore;
 
-public class ClassAnalyzer {
+public class ClassTester {
 	/**
 	 * A class loader that loads classes from in-memory data.
 	 */
@@ -40,6 +44,8 @@ public class ClassAnalyzer {
 	String junitName;
 	int totalPassed;
 	int totalFailed;
+	private HashMap<Integer, TestRequirement> testRequirements = new HashMap<Integer, TestRequirement>();
+	
 	public static class MemoryClassLoader extends ClassLoader
 	{
 		private final Map<String, byte[]> definitions = new HashMap<String, byte[]>();
@@ -108,8 +114,7 @@ public class ClassAnalyzer {
         runner.run(res);
         return res;
     }
-
-	public void test(String methodName) throws Exception {
+	public void analyze(String methodName) throws Exception {
 		//targetName = Calculator.class.getName();
 		//targetName = Max.class.getName();
 		
@@ -132,7 +137,6 @@ public class ClassAnalyzer {
 		
 		if(currentTestPassed) totalPassed++;
 		else totalFailed++;
-		
 		//System.out.println(methodName+" "+currentTestPassed);
 		final ExecutionDataStore executionData = new ExecutionDataStore();
 		data.collect(executionData, new SessionInfoStore(), false);
@@ -140,7 +144,6 @@ public class ClassAnalyzer {
 		
 		collect(executionData, currentTestPassed, targetName);
 	}
-	
 	public void collect(final ExecutionDataStore executionData, boolean currentTestPassed,String targetName) {
 		final CoverageBuilder coverageBuilder = new CoverageBuilder();
 		Analyzer analyzer = new Analyzer(executionData, coverageBuilder);
@@ -165,6 +168,21 @@ public class ClassAnalyzer {
 				//System.out.printf("Line %s: %s%n", Integer.valueOf(i), getColor(cc.getLine(i).getStatus()));
 				
 				//System.out.println();
+				HitCounter hc=null;
+				if(getColor(cc.getLine(i).getStatus())=="green" && currentTestPassed) {
+					hc=HitCounter.ExecutedBYPassedTest;
+				}
+				else if(getColor(cc.getLine(i).getStatus())!="green" && currentTestPassed) {
+					hc=HitCounter.NotExecutedByPassedTest;
+				}
+				else if(getColor(cc.getLine(i).getStatus())=="green" && !currentTestPassed) {
+					hc=HitCounter.ExecutedByFailedTest;
+				}
+				else {
+					hc=HitCounter.NotExecutedByFailedTes;
+				}
+				
+				updateRequirement(targetName, i, hc);
 			}
 			if(currentTestPassed) {
 				System.out.print("+");
@@ -175,7 +193,28 @@ public class ClassAnalyzer {
 			System.out.println();
 		}
 	}
-	public void analyze(Class classobj) throws Exception {
+	private void updateRequirement(String className, int lineNumber, HitCounter hitresult) {
+		TestRequirement testRequirement = new TestRequirement(className, lineNumber);
+		TestRequirement foundRequirement = testRequirements.get(testRequirement.hashCode());
+
+		if (foundRequirement == null) {
+			testRequirements.put(testRequirement.hashCode(), testRequirement);
+		} else {
+			testRequirement = foundRequirement;
+		}
+
+		if (hitresult==HitCounter.ExecutedBYPassedTest) {
+			testRequirement.increase_cep();
+		} else if(hitresult==HitCounter.ExecutedByFailedTest){
+			testRequirement.increase_cef();
+		}
+		else if(hitresult==HitCounter.NotExecutedByPassedTest) {
+			testRequirement.increase_cnp();
+		}
+		else testRequirement.increase_cnf();
+		//System.out.println("class name: "+targetName+" Line number: "+testRequirement.getLineNumber()+" cef: "+testRequirement.getCef()+" cep: "+testRequirement.getCep()+" cnp "+testRequirement.getCnp()+" cnf "+testRequirement.getCnf());
+	}
+	public void test(Class classobj) throws Exception {
 		//Class classobj = CalculatorTest.class;
 		Method[] methods = classobj.getDeclaredMethods(); 
 		int nMethod=0;
@@ -183,22 +222,32 @@ public class ClassAnalyzer {
             String MethodName = method.getName(); 
             //System.out.println("Name of the method: "+ MethodName); 
             nMethod++;
-            test(MethodName);
+            analyze(MethodName);
         } 
 		System.out.println(nMethod);
 	}
-	public void generateMatrix() {
-		
-		
+	public void generateMatrix() {		
+	}
+	public void print() {
+		for (Entry<Integer, TestRequirement> entry : testRequirements.entrySet()) {
+		    System.out.println(entry.getValue());
+		}
 	}
 	public static void main(final String[] args) throws Exception{
-		ClassAnalyzer ca=new ClassAnalyzer();
+		ClassTester ca=new ClassTester();
 		//ca.targetName = Max.class.getName();
 		//ca.junitName=MaxTest.class.getName();
 		//ca.analyze(MaxTest.class);
 		ca.targetName = Triangle.class.getName();
 		ca.junitName=TriangleTest.class.getName();
-		ca.analyze(TriangleTest.class);
+		ca.test(TriangleTest.class);
 		System.out.println("Passed= "+ca.totalPassed+"\nFailed= "+ca.totalFailed);
+		//System.out.println(Arrays.asList(ca.testRequirements));
+		//ca.print();
+		HeuristicCalculator hc=new HeuristicCalculator(new TarantulaHeuristic(), ca.testRequirements.values());
+		ArrayList<TestRequirement> rank=hc.calculateRank();
+		for (TestRequirement testRequirement : rank) {
+			System.out.println(testRequirement.toString());
+		}
 	}
 }
