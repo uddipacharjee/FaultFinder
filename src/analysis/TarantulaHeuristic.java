@@ -19,5 +19,4 @@ public class TarantulaHeuristic implements Heuristic {
 	public HeuristicEnum getEnum() {
 		return HeuristicEnum.TARANTULA;
 	}
-
 }

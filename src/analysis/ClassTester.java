@@ -1,10 +1,12 @@
 package analysis;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,27 +16,20 @@ import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICounter;
-import org.jacoco.core.analysis.ILine;
 import org.jacoco.core.data.ExecutionDataStore;
+import org.jacoco.core.data.SessionInfoStore;
 import org.jacoco.core.instr.Instrumenter;
 import org.jacoco.core.runtime.IRuntime;
 import org.jacoco.core.runtime.LoggerRuntime;
-import org.junit.runner.JUnitCore;
+import org.jacoco.core.runtime.RuntimeData;
 //import org.junit.runner.Result;
 //import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 
-import p1.Calculator;
-import p1.CalculatorTest;
 import p3.Max;
 import p3.MaxTest;
-import triangle.Triangle;
-import triangle.TriangleTest;
-
-import org.jacoco.core.runtime.RuntimeData;
-import org.jacoco.core.data.SessionInfoStore;
 
 public class ClassTester {
 	/**
@@ -117,10 +112,11 @@ public class ClassTester {
 	public void analyze(String methodName) throws Exception {
 		//targetName = Calculator.class.getName();
 		//targetName = Max.class.getName();
-		
+		InputStream inputSTream=getTargetClass(targetName);
 		final IRuntime runtime = new LoggerRuntime();
 		final Instrumenter instr = new Instrumenter(runtime);
-		final byte[] instrumented = instr.instrument(getTargetClass(targetName), "");
+		//final byte[] instrumented = instr.instrument(getTargetClass(targetName), "");
+		final byte[] instrumented = instr.instrument(inputSTream, "");
 		final RuntimeData data = new RuntimeData();
 		runtime.startup(data);
 		
@@ -220,7 +216,7 @@ public class ClassTester {
 		int nMethod=0;
 		for (Method method : methods) { 
             String MethodName = method.getName(); 
-            //System.out.println("Name of the method: "+ MethodName); 
+            System.out.println("Name of the method: "+ MethodName); 
             nMethod++;
             analyze(MethodName);
         } 
@@ -235,12 +231,39 @@ public class ClassTester {
 	}
 	public static void main(final String[] args) throws Exception{
 		ClassTester ca=new ClassTester();
-		//ca.targetName = Max.class.getName();
-		//ca.junitName=MaxTest.class.getName();
-		//ca.analyze(MaxTest.class);
-		ca.targetName = Triangle.class.getName();
-		ca.junitName=TriangleTest.class.getName();
-		ca.test(TriangleTest.class);
+//		ca.targetName = Max.class.getName();
+//		ca.junitName=MaxTest.class.getName();
+//		ca.test(MaxTest.class);
+//		ca.targetName = Triangle.class.getName();
+//		ca.junitName=TriangleTest.class.getName();
+//		ca.test(TriangleTest.class);
+		
+		//File file = new File("resources\\TriangleProject\\bin\\"); 
+		//File file = new File("C:\\Users\\Hp\\eclipse-workspace\\TriangleProject\\bin");
+        //convert the file to URL format
+		//URL url = file.toURI().toURL(); 
+		URL url=null;
+		URL[] urls = new URL[]{url}; 
+		        //load this folder into Class loader
+
+		ClassLoader cl = new URLClassLoader(urls); 
+		        //load the Address class in 'c:\\other_classes\\'
+		
+		final Class<?>  cls = cl.loadClass("triangle.Triangle");
+		ca.targetName=cls.getName();
+		final Class<?>  clsTest = cl.loadClass("triangle.TriangleTest");
+		ca.junitName=clsTest.getName();
+		System.out.println(ca.targetName+" "+ca.junitName+" "+clsTest);
+		//System.out.println(Calculator.class.getName()+" "+CalculatorTest.class.getName()+" "+CalculatorTest.class);
+		InputStream inputSTream=ca.getTargetClass(ca.targetName);
+		System.out.println(inputSTream);
+		ca.test(clsTest);
+
+
+		/*
+		 * ca.targetName = Calculator.class.getName();
+		 * ca.junitName=CalculatorTest.class.getName(); ca.test(CalculatorTest.class);
+		 */	
 		System.out.println("Passed= "+ca.totalPassed+"\nFailed= "+ca.totalFailed);
 		//System.out.println(Arrays.asList(ca.testRequirements));
 		//ca.print();
@@ -249,5 +272,6 @@ public class ClassTester {
 		for (TestRequirement testRequirement : rank) {
 			System.out.println(testRequirement.toString());
 		}
+		
 	}
 }
