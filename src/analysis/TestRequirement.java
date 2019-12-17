@@ -95,9 +95,11 @@ public class TestRequirement implements Comparable<TestRequirement> {
 	public int compareTo(TestRequirement o) {
 		return this.suspiciousness.compareTo(o.getSuspiciousness());
 	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "lineNumber: "+lineNumber+" cef: "+cef+" cep: "+cep+" cnf: "+cnf+" cnp: "+cnp+" suscpiciousness: "+suspiciousness+" \n";
+		//return "lineNumber: "+lineNumber+" cef: "+cef+" cep: "+cep+" cnf: "+cnf+" cnp: "+cnp+" suscpiciousness: "+suspiciousness+" \n";
+		return lineNumber+" "+suspiciousness+"\n";
 	}
 }

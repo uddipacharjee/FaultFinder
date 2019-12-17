@@ -1,0 +1,49 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven Bundle Plugin
+Built-By: godin
+Build-Jdk: 1.8.0_152
+Automatic-Module-Name: org.jacoco.core
+Bnd-LastModified: 1557349141354
+Bundle-Description: JaCoCo Core
+Bundle-License: http://www.eclipse.org/legal/epl-v10.html
+Bundle-ManifestVersion: 2
+Bundle-Name: JaCoCo Core
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-SymbolicName: org.jacoco.core
+Bundle-Vendor: Mountainminds GmbH & Co. KG
+Bundle-Version: 0.8.4.201905082037
+Eclipse-SourceReferences: scm:git:git://github.com/jacoco/jacoco.git;p
+ ath="org.jacoco.core";commitId=723a1acc6b4ab23556554568025c97c69035b120
+Export-Package: org.jacoco.core.internal;x-internal:=true;version="0.8
+ .4",org.jacoco.core.internal.analysis;x-internal:=true;version="0.8.4
+ ";uses:="org.jacoco.core.analysis,org.jacoco.core.internal.analysis.f
+ ilter,org.jacoco.core.internal.flow,org.objectweb.asm,org.objectweb.a
+ sm.tree",org.jacoco.core.internal.analysis.filter;x-internal:=true;ve
+ rsion="0.8.4";uses:="org.objectweb.asm.tree",org.jacoco.core.internal
+ .data;x-internal:=true;version="0.8.4",org.jacoco.core.internal.flow;
+ x-internal:=true;version="0.8.4";uses:="org.jacoco.core.internal.anal
+ ysis,org.objectweb.asm,org.objectweb.asm.commons,org.objectweb.asm.tr
+ ee",org.jacoco.core.internal.instr;x-internal:=true;version="0.8.4";u
+ ses:="org.jacoco.core.internal.flow,org.jacoco.core.runtime,org.objec
+ tweb.asm",org.jacoco.core;version="0.8.4",org.jacoco.core.analysis;ve
+ rsion="0.8.4";uses:="org.jacoco.core.data,org.jacoco.core.internal.an
+ alysis",org.jacoco.core.data;version="0.8.4";uses:="org.jacoco.core.i
+ nternal.data",org.jacoco.core.instr;version="0.8.4";uses:="org.jacoco
+ .core.runtime",org.jacoco.core.runtime;version="0.8.4";uses:="org.jac
+ oco.core.data,org.objectweb.asm",org.jacoco.core.tools;version="0.8.4
+ ";uses:="org.jacoco.core.data"
+Import-Package: org.jacoco.core;version="[0.8.4,0.8.5)",org.jacoco.cor
+ e.analysis;version="[0.8.4,0.8.5)",org.jacoco.core.data;version="[0.8
+ .4,0.8.5)",org.jacoco.core.internal;version="[0.8.4,0.8.5)",org.jacoc
+ o.core.internal.analysis;version="[0.8.4,0.8.5)",org.jacoco.core.inte
+ rnal.analysis.filter;version="[0.8.4,0.8.5)",org.jacoco.core.internal
+ .data;version="[0.8.4,0.8.5)",org.jacoco.core.internal.flow;version="
+ [0.8.4,0.8.5)",org.jacoco.core.internal.instr;version="[0.8.4,0.8.5)"
+ ,org.jacoco.core.runtime;version="[0.8.4,0.8.5)",org.objectweb.asm;ve
+ rsion="[7.1.0,7.2)",org.objectweb.asm.commons;version="[7.1.0,7.2)",o
+ rg.objectweb.asm.tree;version="[7.1.0,7.2)"
+Originally-Created-By: Apache Maven Bundle Plugin
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.5))"
+Tool: Bnd-3.5.0.201709291849
+

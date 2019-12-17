@@ -1,0 +1,162 @@
+Signature-Version: 1.0
+SHA-256-Digest-Manifest-Main-Attributes: GqSdgHd9VOOF+HRTCKxhjbmTinBdH
+ JvKGrm5xW9Xi3Q=
+SHA-256-Digest-Manifest: XJnMWtiffGsK1H32qTIKzoc53VsxgiBKdWXYjy1Qxxk=
+Created-By: 1.8.0_162 (Oracle Corporation)
+
+Name: org/hamcrest/core/StringContains.class
+SHA-256-Digest: uvCarvl5XH1WtGOzAiUiQrlriD1pRUsEPCkWEvCc5no=
+
+Name: org/hamcrest/MatcherAssert.class
+SHA-256-Digest: LRxo8AEizR2QhFsq2ZXDiCu3vCg/iZM2fQn1Rffomn0=
+
+Name: org/hamcrest/core/IsCollectionContaining.class
+SHA-256-Digest: RL3CPmbJqgO+TWthbfRRuM/ExmnxAqVOXVJ8xiQwNNc=
+
+Name: org/hamcrest/SelfDescribing.class
+SHA-256-Digest: KRQXgn/NtcCRCge4+qtjn4r0779c/CoiSMClkDt112o=
+
+Name: org/hamcrest/core/CombinableMatcher$CombinableEitherMatcher.clas
+ s
+SHA-256-Digest: obOg2iyr/D8bsA/IqC0KIZFLi6jytjAVjjHd8o13U0o=
+
+Name: org/hamcrest/core/CombinableMatcher$CombinableBothMatcher.class
+SHA-256-Digest: iUxUkEbM0+TlNkHJ7mOsLl2VfXQd8X7jmw+VMV9pAHI=
+
+Name: org/hamcrest/internal/SelfDescribingValueIterator.class
+SHA-256-Digest: VIyWO0vHlrg/gR/Ft8zImxqIsM9vYEiyrTaq14lVoss=
+
+Name: org/hamcrest/core/IsAnything.class
+SHA-256-Digest: JqkkHWQVv9n11vP+d4KKuHUAyWoB8/YXoVqGtPub+aw=
+
+Name: org/hamcrest/core/AnyOf.class
+SHA-256-Digest: ZTVwE8KRkgO8pubezkftbNk2HDVEZ7QsShPTm9akq9M=
+
+Name: org/hamcrest/Condition$NotMatched.class
+SHA-256-Digest: LS59rbR2XG8vSEv9k+rNRnO/ecBK2ZYhjSisvVNww/M=
+
+Name: org/hamcrest/core/StringStartsWith.class
+SHA-256-Digest: +E9Ihx2Qh4mHX/Jxz9g/Bef207bp4I5Pa2fwQgnxdGc=
+
+Name: org/hamcrest/Condition$Matched.class
+SHA-256-Digest: 6KvnArsZetE7ceedDcdteSdJHSqg9weWqIEWK+PRha8=
+
+Name: org/hamcrest/core/AllOf.class
+SHA-256-Digest: 6Z+zdwUaum33dxuxkGTv/MHSt3VbKrgGvhiarxBzTVw=
+
+Name: org/hamcrest/core/SubstringMatcher.class
+SHA-256-Digest: QTzc5ebA0xUaKFsZCLFSsXgVy4HiTLbB3ZFQgDqxooQ=
+
+Name: org/hamcrest/CustomMatcher.class
+SHA-256-Digest: EkOGZr6QGcqD50Up+W7vt+u3ZoOQ4NC+DoCDb9W6rec=
+
+Name: LICENSE.txt
+SHA-256-Digest: /GcsrNCnIkxwvWz3rY5VFlKvwpAG99zb8XhXx2RfzuA=
+
+Name: org/hamcrest/core/Every.class
+SHA-256-Digest: 7fV/IEjhvNixwAwTMy83M6BNqtUvjQmwBRbDX18Zqh0=
+
+Name: org/hamcrest/core/IsEqual.class
+SHA-256-Digest: efJv320BRLytq5YNBdeKRQdZUKVe5oS06rgxdN7KAXQ=
+
+Name: OSGI-INF/l10n/bundle.properties
+SHA-256-Digest: YaMGDjD4bQzQ//mKBZWFnI37Z5A6KDr2x8KiYFHIN9U=
+
+Name: org/hamcrest/core/IsNull.class
+SHA-256-Digest: nq80ZPoNcc2tsLdN0G+APjbbpJu3oD+L7y0yTcNk2mo=
+
+Name: about_files/NEW_BSD_LICENSE.html
+SHA-256-Digest: bcWNHgeeuwSdD3znQDtYBHOagmxCnpzeINGCxO/m3mE=
+
+Name: org/hamcrest/Description$NullDescription.class
+SHA-256-Digest: 0YimbcfY2OeUF/ioSsrP9fM/JL0rf7vaeNYUysFMwtE=
+
+Name: org/hamcrest/Description.class
+SHA-256-Digest: WW+SsG+4Dcr9puiu46qycm2t7ISjHB/flt0BSTcjURc=
+
+Name: org/hamcrest/TypeSafeDiagnosingMatcher.class
+SHA-256-Digest: OmJ/7cPzvr2VmcPti3sQNnKmSnQRMvdCCNhTp0qtino=
+
+Name: org/hamcrest/Condition$Step.class
+SHA-256-Digest: LqKlvGv9gE2GD46SQDAHfoKl/44jTIlO077x4VgBHl4=
+
+Name: org/hamcrest/core/IsSame.class
+SHA-256-Digest: eU2i72Z+rWrmtKzGkffYFsGYZFbPNEQv6MjNQ3nBQwc=
+
+Name: org/hamcrest/BaseDescription.class
+SHA-256-Digest: sBmdXYtwdgZAGylGR7fMGwYfQL4Qqnl+x8yFGdvcSIg=
+
+Name: org/hamcrest/Condition$1.class
+SHA-256-Digest: MYaAjaE1z1fC1cBfSONOOojbW5xL9A6VclmJC1JH/Zc=
+
+Name: org/hamcrest/core/DescribedAs.class
+SHA-256-Digest: uLkFd30ebN72bAhzHrx+KtbRq96IqTyTLh4rN4it8gY=
+
+Name: org/hamcrest/BaseMatcher.class
+SHA-256-Digest: wlAKEL2YgOQ+SPhP6c4T7heQDFDNAjgcrfjPtM0i0aA=
+
+Name: org/hamcrest/core/ShortcutCombination.class
+SHA-256-Digest: wki8GRlPHMr5N9oasYwEWiFzc++Bb0Cwn9AX5ToFqWc=
+
+Name: org/hamcrest/FeatureMatcher.class
+SHA-256-Digest: +AJTbe13BTCf26S1ljf1oCu4SnApQVPMfGc0XCHtedY=
+
+Name: org/hamcrest/CustomTypeSafeMatcher.class
+SHA-256-Digest: hjMAJEMvnfJ6NGdH4ZQDKrlfG2gc6zm1TDDGFZeR19w=
+
+Name: META-INF/maven/org.eclipse.orbit.bundles/org.hamcrest.core/pom.x
+ ml
+SHA-256-Digest: Qh0rY8WeuOTK9uyYcFnHHCYDCTFyWkrZ6AjEgOZkp3s=
+
+Name: org/hamcrest/core/IsNot.class
+SHA-256-Digest: njv3MgiKpFDZZtjAxQ9Cq9ycb8jRtntD9azPLgxfItw=
+
+Name: org/hamcrest/internal/SelfDescribingValue.class
+SHA-256-Digest: du+yQtaWB1RHMpCZftPfQ5CIX3pwV8w2kmoy76o1F7Q=
+
+Name: org/hamcrest/Condition.class
+SHA-256-Digest: vFSWF+fPHPKucmqrpNmPoZpVClaI3JoSn5cXwQMWQEg=
+
+Name: org/hamcrest/core/CombinableMatcher.class
+SHA-256-Digest: pwrF5rbCExdlyNk9+h8aU4aKMcZ4IwQ+uMnF5OC+IKo=
+
+Name: org/hamcrest/CoreMatchers.class
+SHA-256-Digest: LGfSqDwO8o06bPeJEkiopWRV9YAZYNfhqaNzRR4H48w=
+
+Name: about.html
+SHA-256-Digest: 6RdUs61EVSC8kKgiwEd6+L+DgCQcatdSssxu7B3eDGo=
+
+Name: org/hamcrest/internal/ReflectiveTypeFinder.class
+SHA-256-Digest: DYCMZKrUlIRKG1zGk1jLnlB+Fk47WRoz+7An8CP+MVQ=
+
+Name: org/hamcrest/core/StringEndsWith.class
+SHA-256-Digest: p/M0VGISHZpkoLM3CXxUQxXZbbqjy5MtIfhfKvv4K8g=
+
+Name: org/hamcrest/Factory.class
+SHA-256-Digest: Ql1a0UVJtEA3rCyDOGHDXS6fBzSONCTvcu0XetKcc2k=
+
+Name: org/hamcrest/internal/ArrayIterator.class
+SHA-256-Digest: 2OSo7l7REqlKlKJ8hwnT2YijFtz0BeCORDMoH6tieC4=
+
+Name: META-INF/maven/org.eclipse.orbit.bundles/org.hamcrest.core/pom.p
+ roperties
+SHA-256-Digest: T7j8PK21PhHRRRHReMARwWUXpMjRnMkWpAoMaVOG7dQ=
+
+Name: org/hamcrest/core/Is.class
+SHA-256-Digest: leauhf4/wgO+OersgRdNQilRL7nAXGaEnEW6Sqwxi5Y=
+
+Name: org/hamcrest/DiagnosingMatcher.class
+SHA-256-Digest: TI1C7CWezgDYrojzuFNYSAdjEW/nGvQEgLCRGMYMWoo=
+
+Name: org/hamcrest/Matcher.class
+SHA-256-Digest: /uzg1G1qPItEjA9dMMhEHMewzPqh7JMQv2v9JcLQ8fA=
+
+Name: org/hamcrest/StringDescription.class
+SHA-256-Digest: fuctdMoXgUhrUY9B7mttr8pstT7Z6TKdlzZs17dLGAc=
+
+Name: org/hamcrest/TypeSafeMatcher.class
+SHA-256-Digest: olWwKxAk9PMhkEZ/q90DCp3crlHPvhrNbo0vwZLsymw=
+
+Name: org/hamcrest/core/IsInstanceOf.class
+SHA-256-Digest: f1pwfCrhvv0z0r6vT9bJPubdNatM1XDDKC6S2awFy5k=
+

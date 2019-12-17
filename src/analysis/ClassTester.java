@@ -1,5 +1,9 @@
 package analysis;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -27,9 +31,6 @@ import org.jacoco.core.runtime.RuntimeData;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
-
-import p3.Max;
-import p3.MaxTest;
 
 public class ClassTester {
 	/**
@@ -140,7 +141,7 @@ public class ClassTester {
 		
 		collect(executionData, currentTestPassed, targetName);
 	}
-	public void collect(final ExecutionDataStore executionData, boolean currentTestPassed,String targetName) {
+	public void collect(final ExecutionDataStore executionData, boolean currentTestPassed,String targetName) throws IOException {
 		final CoverageBuilder coverageBuilder = new CoverageBuilder();
 		Analyzer analyzer = new Analyzer(executionData, coverageBuilder);
 
@@ -150,20 +151,27 @@ public class ClassTester {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter("matrix"));
+		BufferedWriter bwl = new BufferedWriter(new FileWriter("matLine"));
+		
 		for (final IClassCoverage cc : coverageBuilder.getClasses())
 		{
 			for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
 				
 				if(getColor(cc.getLine(i).getStatus())=="green") {
-					System.out.print(1+" ");
+					//System.out.print("("+i+")"+" ");
+				    bw.write("1");
 				}
 				else {
-					System.out.print(0+" ");
+					//System.out.print("["+i+"]"+" ");
+					bw.write("0");
 				}
 				//System.out.printf("Line %s: %s%n", Integer.valueOf(i), getColor(cc.getLine(i).getStatus()));
 				
 				//System.out.println();
+				
 				HitCounter hc=null;
 				if(getColor(cc.getLine(i).getStatus())=="green" && currentTestPassed) {
 					hc=HitCounter.ExecutedBYPassedTest;
@@ -181,12 +189,15 @@ public class ClassTester {
 				updateRequirement(targetName, i, hc);
 			}
 			if(currentTestPassed) {
-				System.out.print("+");
+				//System.out.print("+");
+				bw.write("+");
 			}
 			else {
-				System.out.print("-");
+				//System.out.print("-");
+				bw.write("-");
 			}
-			System.out.println();
+			//System.out.println();
+			bw.newLine();
 		}
 	}
 	private void updateRequirement(String className, int lineNumber, HitCounter hitresult) {
@@ -216,11 +227,11 @@ public class ClassTester {
 		int nMethod=0;
 		for (Method method : methods) { 
             String MethodName = method.getName(); 
-            System.out.println("Name of the method: "+ MethodName); 
+            //System.out.println("Name of the method: "+ MethodName); 
             nMethod++;
             analyze(MethodName);
         } 
-		System.out.println(nMethod);
+		//System.out.println(nMethod);
 	}
 	public void generateMatrix() {		
 	}
@@ -241,22 +252,30 @@ public class ClassTester {
 		//File file = new File("resources\\TriangleProject\\bin\\"); 
 		//File file = new File("C:\\Users\\Hp\\eclipse-workspace\\TriangleProject\\bin");
         //convert the file to URL format
-		//URL url = file.toURI().toURL(); 
+		//URL url = file.toURI().toURL();
+		BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Hp\\eclipse-workspace\\FaultFinder\\bin\\names.txt"));
+		
+		String className=br.readLine(); //"triangle.Triangle"
+		String testClassName=br.readLine(); //"triangle.TriangleTest"
+		//String className="triangle.Triangle";
+		//String testClassName="triangle.TriangleTest";
+		
+		//System.out.println(className+" "+testClassName);
 		URL url=null;
 		URL[] urls = new URL[]{url}; 
 		        //load this folder into Class loader
 
-		ClassLoader cl = new URLClassLoader(urls); 
+		ClassLoader cl = new URLClassLoader(urls);
 		        //load the Address class in 'c:\\other_classes\\'
 		
-		final Class<?>  cls = cl.loadClass("triangle.Triangle");
+		final Class<?>  cls = cl.loadClass(className);
 		ca.targetName=cls.getName();
-		final Class<?>  clsTest = cl.loadClass("triangle.TriangleTest");
+		final Class<?>  clsTest = cl.loadClass(testClassName);
 		ca.junitName=clsTest.getName();
-		System.out.println(ca.targetName+" "+ca.junitName+" "+clsTest);
+		//System.out.println(ca.targetName+" "+ca.junitName+" "+clsTest);
 		//System.out.println(Calculator.class.getName()+" "+CalculatorTest.class.getName()+" "+CalculatorTest.class);
 		InputStream inputSTream=ca.getTargetClass(ca.targetName);
-		System.out.println(inputSTream);
+		//System.out.println(inputSTream);
 		ca.test(clsTest);
 
 
@@ -264,13 +283,14 @@ public class ClassTester {
 		 * ca.targetName = Calculator.class.getName();
 		 * ca.junitName=CalculatorTest.class.getName(); ca.test(CalculatorTest.class);
 		 */	
-		System.out.println("Passed= "+ca.totalPassed+"\nFailed= "+ca.totalFailed);
+		//System.out.println("Passed= "+ca.totalPassed+"\nFailed= "+ca.totalFailed);
 		//System.out.println(Arrays.asList(ca.testRequirements));
 		//ca.print();
 		HeuristicCalculator hc=new HeuristicCalculator(new TarantulaHeuristic(), ca.testRequirements.values());
 		ArrayList<TestRequirement> rank=hc.calculateRank();
 		for (TestRequirement testRequirement : rank) {
-			System.out.println(testRequirement.toString());
+			System.out.print(testRequirement.toString());
+			
 		}
 		
 	}
