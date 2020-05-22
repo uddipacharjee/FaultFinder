@@ -1,0 +1,1 @@
+FaultFinder is tool for detecting logical faults in program statement for given test cases based on spectrum based fault localization approach. The main purpose of the tool to reduce debugging time and cost by finding logical faults in source code.
